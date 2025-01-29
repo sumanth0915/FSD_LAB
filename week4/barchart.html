@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Bar Chart</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    canvas { width: 100%; max-width: 600px; margin: 20px auto; }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Weather Data Bar Chart</h1>
+  
+
+  <canvas id="myChart"></canvas>
+
+  <script>
+   
+    const weatherData = [
+      { date: '2025-01-01', temperature: 15 },
+      { date: '2025-01-02', temperature: 17 },
+      { date: '2025-01-03', temperature: 14 },
+      { date: '2025-01-04', temperature: 19 },
+      { date: '2025-01-05', temperature: 21 },
+      { date: '2025-01-06', temperature: 22 },
+      { date: '2025-01-07', temperature: 18 }
+    ];
+
+    const dates = weatherData.map(data => data.date);
+    const temperatures = weatherData.map(data => data.temperature);
+
+   
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: dates, 
+        datasets: [{
+          label: 'Temperature (°C)', 
+          data: temperatures, 
+          backgroundColor: 'rgba(75, 192, 192, 0.2)', 
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true, 
+            title: {
+              display: true,
+              text: 'Temperature (°C)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Date'
+            }
+          }
+        },
+        responsive: true, 
+        plugins: {
+          legend: {
+            position: 'top'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
